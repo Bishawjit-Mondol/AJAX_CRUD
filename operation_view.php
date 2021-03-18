@@ -1,6 +1,6 @@
 <?php
 include "database.php";
-$ViewQuery = "SELECT * FROM `user_data`";
+$ViewQuery = "SELECT * FROM `user_data` ORDER BY id DESC";
 $allData = $database->query($ViewQuery);
 
 if ($allData->num_rows) : $counter = 1; ?>

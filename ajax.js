@@ -34,20 +34,29 @@ $(document).ready(function () {
           "X-Requested-With": "XMLHttpRequest"
         },
         dataType: "JSON",
-        success: function (dataResult) {
-          var dataResult = JSON.parse(dataResult);
-          alert(dataResult);
-          if (dataResult.statusCode == 200) {
-            $("#butsave").removeAttr("disabled");
-            $('#fupForm').find('input:text').val('');
-            $("#success").show();
-            $('#success').html('Data added successfully !');
-          }
-          else if (dataResult.statusCode == 201) {
-            alert("Error occured !");
-          }
+        success: function (dataResults) {
+          
+          $("#butsave").removeAttr("disabled");
+          $('#fupForm').find('input:text').val('');
+          $("#success").show();
+          $('#success').html('Data added successfully !');
+          setTimeout(function(){
+            window.location.reload();
+          },3000);
+          
 
-        }
+          // var dataResult = JSON.parse(dataResults);
+
+          // alert(dataResult.statusCode);
+          // if (dataResult.statusCode == 200) {
+           
+          // }
+          // else if (dataResult.statusCode == 201) {
+          //   alert("Error occured !");
+          // }
+
+        },
+
       });
     }
     else {
