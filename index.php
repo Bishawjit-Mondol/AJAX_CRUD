@@ -11,12 +11,15 @@ include 'database.php';
   <title>User Information</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 
+
 </head>
 
 <body>
   <br>
   <div class="container">
+    <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    </div>
     <form id="fupForm" name="form1">
 
       <div class="form-group row">
@@ -49,9 +52,37 @@ include 'database.php';
     </form>
   </div>
 
+  <div class="container">
+    <h2>All User data</h2>
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>City</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+
+      </tbody>
+    </table>
+  </div>
 
   <script src="jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+      $(document).ready(function() {
+        $.ajax({
+          url: "operation_view.php",
+          method: "GET",
+          success: function(data) {
+            console
+            $('#table').html(data);
+          }
+        });
+      });
+    </script>
   <script src="ajax.js"></script>
 
 </body>
