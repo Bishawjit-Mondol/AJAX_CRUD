@@ -128,6 +128,31 @@ include 'database.php';
   </div>
   <!-- Modal End-->
 
+
+  <!-- Delete Modal HTML -->
+	<div id="deleteEmployeeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+						
+					<div class="modal-header">						
+						<h4 class="modal-title">Delete User</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body">
+						<input type="text" id="id_d" name="id" class="form-control">					
+						<p>Are you sure you want to delete these Records?</p>
+						<p class="text-warning"><small>This action cannot be undone.</small></p>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<button type="button" class="btn btn-danger" id="delete">Delete</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
   <script src="jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- View Data -->
@@ -199,6 +224,32 @@ include 'database.php';
       });
     });
   </script>
+
+  <!-- Delete Data -->
+  <script>
+  $(document).on("click", ".delete", function() { 
+		var id=$(this).attr("data-id");
+		$('#id_d').val(id);
+    console.log(id);
+		
+	});
+	$(document).on("click", "#delete", function() { 
+   
+		$.ajax({
+			url: "operation_delete.php",
+			method: "GET",
+			data:{
+				id: $("#id_d").val()
+			},
+			success: function(dataResult){
+					$('#deleteEmployeeModal').modal('hide');
+					$("#"+dataResult).remove();
+          alert('Data deleted successfully !');
+          window.location.reload();
+			}
+		});
+	});
+</script>
   <script src="ajax.js"></script>
 
 </body>
