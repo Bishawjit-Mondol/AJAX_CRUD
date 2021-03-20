@@ -11,6 +11,14 @@ if ($allData->num_rows) : $counter = 1; ?>
 			<td><?= $data->name; ?></td>
 			<td><?= $data->phone;?></td>
 			<td><?= $data->city; ?></td>
+            <td>
+                <button type="button" class="btn btn-success btn-sm update" data-toggle="modal" data-keyboard="false" data-backdrop="static" data-target="#update_country"
+                    data-id="<?=$data->id;?>"
+                    data-name="<?=$data->name;?>"
+                    data-phone="<?=$data->phone;?>"
+                    data-city="<?=$data->city;?>">Edit
+                </button>
+            </td>
 		</tr>
     <?php endwhile; ?>
 <?php endif; ?>

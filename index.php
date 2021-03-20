@@ -57,32 +57,148 @@ include 'database.php';
     <table class="table table-bordered table-sm">
       <thead>
         <tr>
-          <th>Id</th>
+          <th>ID</th>
           <th>Name</th>
           <th>Phone</th>
           <th>City</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody id="table">
 
       </tbody>
+      <tfoot>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>City</th>
+        <th>Action</th>
+      </tfoot>
     </table>
   </div>
 
+  <!-- Modal Update-->
+  <div class="modal fade" id="update_country" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header" style="color:#fff;background-color: #e35f14;padding:6px;">
+          <h5 class="modal-title"><i class="fa fa-edit"></i> Update</h5>
+
+        </div>
+        <div class="modal-body">
+
+          <!--1-->
+          <div class="row">
+            <div class="col-md-3">
+              <label>Name</label>
+            </div>
+            <div class="col-md-9">
+              <input type="text" name="name_modal" id="name_modal" class="form-control-sm" required>
+            </div>
+          </div>
+
+          <!--3-->
+          <div class="row">
+            <div class="col-md-3">
+              <label>Phone</label>
+            </div>
+            <div class="col-md-9">
+              <input type="text" name="phone_modal" id="phone_modal" class="form-control-sm" required>
+            </div>
+          </div>
+          <!--4-->
+          <div class="row">
+            <div class="col-md-3">
+              <label>City</label>
+            </div>
+            <div class="col-md-9">
+              <input type="text" name="city_modal" id="city_modal" class="form-control-sm" required>
+            </div>
+          </div>
+          <input type="text" name="id_modal" id="id_modal" class="form-control-sm">
+        </div>
+        <div class="modal-footer" style="padding-bottom:0px !important;text-align:center !important;">
+          <p style="text-align:center;float:center;"><button type="submit" id="update_data" class="btn btn-default btn-sm" style="background-color: #e35f14;color:#fff;">Save</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" style="background-color: #e35f14;color:#fff;">Close</button>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal End-->
+
   <script src="jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- View Data -->
   <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
+      $.ajax({
+        url: "operation_view.php",
+        method: "GET",
+        success: function(data) {
+          console
+          $('#table').html(data);
+        }
+      });
+    });
+  </script>
+
+  <!-- Update Data -->
+  <script>
+    $(document).ready(function() { 
+      $.ajax({
+        url: "operation_view.php",
+        method: "GET",
+        success: function(dataResult) {
+          $('#table').html(dataResult);
+        }
+      });
+      $(function() {
+        $('#update_country').on('show.bs.modal', function(event) {
+          
+          var button = $(event.relatedTarget); /*Button that triggered the modal*/
+          var id = button.data('id');
+          var name = button.data('name');
+          var phone = button.data('phone');
+          var city = button.data('city');
+
+          console.log(id);
+          var modal = $(this);
+          modal.find('#name_modal').val(name);
+          modal.find('#phone_modal').val(phone);
+          modal.find('#city_modal').val(city);
+          modal.find('#id_modal').val(id);
+        });
+      });
+
+      $(document).on("click", "#update_data", function() {
         $.ajax({
-          url: "operation_view.php",
+          url: "operation_update.php",
           method: "GET",
-          success: function(data) {
-            console
-            $('#table').html(data);
+          data: {
+            id: $('#id_modal').val(),
+            name: $('#name_modal').val(),
+            phone: $('#phone_modal').val(),
+            city: $('#city_modal').val(),
+          },
+          
+          success: function(dataResult) {
+            console.log(dataResult);
+            var dataResult = JSON.parse(dataResult);
+            if (dataResult.statusCode == 200) {
+              $('#update_country').modal().hide();
+              alert('Data updated successfully !');
+              location.reload();
+            }
+          },
+          error: function(error_msg){
+            console.log(error_msg);
           }
         });
       });
-    </script>
+    });
+  </script>
   <script src="ajax.js"></script>
 
 </body>
