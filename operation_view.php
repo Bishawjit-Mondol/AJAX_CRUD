@@ -23,5 +23,3 @@ if ($allData->num_rows) : $counter = 1; ?>
 		</tr>
     <?php endwhile; ?>
 <?php endif; ?>
-
-?>

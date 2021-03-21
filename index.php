@@ -158,6 +158,10 @@ include 'database.php';
   <!-- View Data -->
   <script>
     $(document).ready(function() {
+      function allData();
+    });
+
+    function allData(){
       $.ajax({
         url: "operation_view.php",
         method: "GET",
@@ -165,8 +169,11 @@ include 'database.php';
           $('#table').html(data);
         }
       });
-    });
+    }
+
   </script>
+
+
 
   <!-- Update Data -->
   <script>
