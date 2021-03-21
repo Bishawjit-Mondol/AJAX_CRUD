@@ -130,28 +130,28 @@ include 'database.php';
 
 
   <!-- Delete Modal HTML -->
-	<div id="deleteEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-						
-					<div class="modal-header">						
-						<h4 class="modal-title">Delete User</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					</div>
-					<div class="modal-body">
-						<input type="text" id="id_d" name="id" class="form-control">					
-						<p>Are you sure you want to delete these Records?</p>
-						<p class="text-warning"><small>This action cannot be undone.</small></p>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<button type="button" class="btn btn-danger" id="delete">Delete</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+  <div id="deleteEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form>
+
+          <div class="modal-header">
+            <h4 class="modal-title">Delete User</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body">
+            <input type="text" id="id_d" name="id" class="form-control">
+            <p>Are you sure you want to delete these Records?</p>
+            <p class="text-warning"><small>This action cannot be undone.</small></p>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+            <button type="button" class="btn btn-danger" id="delete">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -162,7 +162,6 @@ include 'database.php';
         url: "operation_view.php",
         method: "GET",
         success: function(data) {
-          console
           $('#table').html(data);
         }
       });
@@ -171,7 +170,7 @@ include 'database.php';
 
   <!-- Update Data -->
   <script>
-    $(document).ready(function() { 
+    $(document).ready(function() {
       $.ajax({
         url: "operation_view.php",
         method: "GET",
@@ -181,7 +180,7 @@ include 'database.php';
       });
       $(function() {
         $('#update_country').on('show.bs.modal', function(event) {
-          
+
           var button = $(event.relatedTarget); /*Button that triggered the modal*/
           var id = button.data('id');
           var name = button.data('name');
@@ -207,7 +206,7 @@ include 'database.php';
             phone: $('#phone_modal').val(),
             city: $('#city_modal').val(),
           },
-          
+
           success: function(dataResult) {
             console.log(dataResult);
             var dataResult = JSON.parse(dataResult);
@@ -217,7 +216,7 @@ include 'database.php';
               location.reload();
             }
           },
-          error: function(error_msg){
+          error: function(error_msg) {
             console.log(error_msg);
           }
         });
@@ -227,29 +226,28 @@ include 'database.php';
 
   <!-- Delete Data -->
   <script>
-  $(document).on("click", ".delete", function() { 
-		var id=$(this).attr("data-id");
-		$('#id_d').val(id);
-    console.log(id);
-		
-	});
-	$(document).on("click", "#delete", function() { 
-   
-		$.ajax({
-			url: "operation_delete.php",
-			method: "GET",
-			data:{
-				id: $("#id_d").val()
-			},
-			success: function(dataResult){
-					$('#deleteEmployeeModal').modal('hide');
-					$("#"+dataResult).remove();
+    $(document).on("click", ".delete", function() {
+      var id = $(this).attr("data-id");
+      $('#id_d').val(id);
+      console.log(id);
+
+    });
+    $(document).on("click", "#delete", function() {
+
+      $.ajax({
+        url: "operation_delete.php",
+        method: "GET",
+        data: {
+          id: $("#id_d").val()
+        },
+        success: function(dataResult) {
+          $('#deleteEmployeeModal').modal('hide');
           alert('Data deleted successfully !');
           window.location.reload();
-			}
-		});
-	});
-</script>
+        }
+      });
+    });
+  </script>
   <script src="ajax.js"></script>
 
 </body>

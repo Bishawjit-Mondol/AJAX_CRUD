@@ -35,21 +35,21 @@ $(document).ready(function () {
         },
         dataType: "JSON",
         success: function (dataResults) {
-          
+
           $("#butsave").removeAttr("disabled");
           $('#fupForm').find('input:text').val('');
           $("#success").show();
           $('#success').html('Data added successfully !');
-          setTimeout(function(){
+          setTimeout(function () {
             window.location.reload();
-          },3000);
-          
+          }, 3000);
+
 
           // var dataResult = JSON.parse(dataResults);
 
           // alert(dataResult.statusCode);
           // if (dataResult.statusCode == 200) {
-           
+
           // }
           // else if (dataResult.statusCode == 201) {
           //   alert("Error occured !");

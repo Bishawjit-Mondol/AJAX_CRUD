@@ -18,4 +18,3 @@ if ($database->query($updateQuery)) {
 else {
     echo json_encode(array("statusCode"=>201));
 }
-?>

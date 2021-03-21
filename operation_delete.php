@@ -10,4 +10,3 @@ if ($database->query($DeleteQuery)) {
 else {
     echo json_encode(array("statusCode"=>201));
 }
-?>
